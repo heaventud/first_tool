@@ -58,12 +58,13 @@ td a {
 <tbody>
     {% block before_rows %}{% endblock before_rows %}
     {% for r in body %}
+    {% set outer_loop = loop %}
     {% block tr scoped %}
     <tr>
         {% for c in r %}
-            {% if loop.index >= 2 %}
+            {% if loop.index0 >= 1 %}
                 {% if c.is_visible != False %}
-                    <{{ c.type }} class="{{ c.class }}"> <a href='Temp/dir_{{loop.index}}/details.html'>{{ c.value }}</a>  {{ c.attributes|join(" ") }}</{{ c.type }}>
+                    <{{ c.type }} class="{{ c.class }}"> <a href='Temp/dir_{{outer_loop.index0}}/details.html'>{{ c.value }}</a>  {{ c.attributes|join(" ") }}</{{ c.type }}>
                 {% else %}
                     <{{ c.type }}{{ c.attributes|join(" ") }}>{{ c.value }}</{{ c.type }}>
                 {% endif %}
