@@ -13,7 +13,7 @@ df.iloc[3, 3] = np.nan
 df.iloc[0, 2] = np.nan
 
 
-EasyStyler = Styler.from_custom_template("", "html.tpl")
+EasyStyler = Styler.from_custom_template("", "view.html")
 
 with open('epic.html', 'w') as fd:
     fd.write(EasyStyler(df).render(table_title="Extending Example"))

@@ -24,9 +24,6 @@
     }
 {%- endfor -%}
 {%- endblock cellstyle %}
-td a {
-    display: block;
-   }
 </style>
 {%- endblock style %}
 {%- block before_table %}{% endblock before_table %}
@@ -39,17 +36,17 @@ td a {
 {%- endblock caption %}
 {%- block thead %}
 <thead>
-    {%- block before_head_rows %}{% endblock %}
-    {%- for r in head %}
-    {%- block head_tr scoped %}
+    {%- block before_head_rows %}{% endblock -%}
+    {%- for r in head -%}
+    {% block head_tr scoped %}
     <tr>
-        {%- for c in r %}
-        {%- if c.is_visible != False %}
+        {% for c in r %}
+        {% if c.is_visible != False %}
         <{{ c.type }} class="{{c.class}}" {{ c.attributes|join(" ") }}>{{c.value}}</{{ c.type }}>
-        {%- endif %}
-        {%- endfor %}
+        {% endif %}
+        {% endfor %}
     </tr>
-    {%- endblock head_tr %}
+    {% endblock head_tr %}
     {%- endfor %}
     {%- block after_head_rows %}{% endblock %}
 </thead>

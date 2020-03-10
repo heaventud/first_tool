@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+ <head>
+  <title></title>
+  <style>
+   table {
+    width: 100%;
+   }
+   th, td {
+    border: 1px solid #333;
+    padding: 5px;
+   }
+   td a {
+    display: block;
+   }
+  </style>
+ </head>
+  <body>
+   <table>
+    <h2 align="center">{{ table_title|default("My Table") }}</h2>
+    <thead>
+        <tr>
+        {% for c in r %}
+            {% if c.is_visible != False %}
+                <th>{{c.value}}</th>
+            {% endif %}
+        {% endfor %}
+        </tr>
+    </thead>
+    {% for r in body %}
+    {% set outer_loop = loop %}
+    {% block tr scoped %}
+    <tr>
+        {% for c in r %}
+            {% if loop.index0 >= 2 %}
+                <{{ c.type }} class="{{ c.class }}"> <a {%if c.value > threshold %} style="color: red" {% endif %} href='Temp/dir_{{outer_loop.index0}}/details.html'>{{ c.value }} %</a> </{{ c.type }}>
+            {% else %}
+                <{{ c.type }}{{ c.attributes|join(" ") }}>{{ c.value }}</{{ c.type }}>
+            {% endif %}
+        {%- endfor %}
+    </tr>
+    {% endblock tr %}
+    {%- endfor %}
+    </tr>
+  </table>
+ </body>
+</html>
